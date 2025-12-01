@@ -16,7 +16,9 @@ install_version() {
 	echo "Installing ESP-IDF version '${install_version}' at '${install_path}' using install type '${install_type}'"
 
 	# Clone the ESP-IDF repository
-	#  git clone -b $install_version --recursive https://github.com/espressif/esp-idf.git esp-idf-$install_version
+	CLONE_PATH="${install_path}/esp-idf-${install_version}"
+	git clone -b $install_version --recursive https://github.com/espressif/esp-idf.git $CLONE_PATH
+	# echo "Clone to '${install_path}/esp-idf-${install_version}'"
 }
 
 install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"

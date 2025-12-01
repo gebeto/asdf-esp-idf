@@ -18,7 +18,7 @@ download_release() {
 
 	echo "Downloading ESP-IDF version '${version}' to '${output_file}' from '${DOWNLOAD_URL}'"
 
-	curl -L -o "$output_file" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
+	# curl -L -s -o "$output_file" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
 }
 
 # TODO: Adapt this to proper extension and adapt extracting strategy.
@@ -28,7 +28,8 @@ release_file="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar.gz"
 download_release "$ASDF_INSTALL_VERSION" "$release_file"
 
 #  Extract contents of tar.gz file into the download directory
-tar -xzf "$release_file" -C "$ASDF_DOWNLOAD_PATH" --strip-components=1 || fail "Could not extract $release_file"
+echo "Extracting '$release_file' to '$ASDF_DOWNLOAD_PATH'"
+# tar -xvzf "$release_file" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file"
 
 # Remove the tar.gz file since we don't need to keep it
-rm "$release_file"
+# rm "$release_file"
