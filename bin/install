@@ -15,10 +15,17 @@ install_version() {
 
 	echo "Installing ESP-IDF version '${install_version}' at '${install_path}' using install type '${install_type}'"
 
-	# Clone the ESP-IDF repository
-	CLONE_PATH="${install_path}/esp-idf-${install_version}"
-	git clone -b $install_version --recursive https://github.com/espressif/esp-idf.git $CLONE_PATH
-	# echo "Clone to '${install_path}/esp-idf-${install_version}'"
+	PACKAGE_TAR_PATH="${install_path}/esp-idf-${install_version}.tar.gz"
+	PACKAGE_INSTALL_PATH="${install_path}"
+
+	DOWNLOAD_URL="https://github.com/espressif/esp-idf/archive/refs/tags/$install_version.tar.gz"
+
+	echo "Package TAR: $PACKAGE_TAR_PATH"
+	echo "Extract TAR TO: $PACKAGE_INSTALL_PATH	"
+
+	curl -L -o "$PACKAGE_TAR_PATH" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
+
+	tar -zxf "$PACKAGE_TAR_PATH" -C "$PACKAGE_INSTALL_PATH" || fail "Could not extract $PACKAGE_TAR_PATH"
 }
 
 install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
