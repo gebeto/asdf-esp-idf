@@ -17,11 +17,7 @@ install_version() {
 
 	PACKAGE_TAR_PATH="${install_path}/esp-idf-${install_version}.tar.gz"
 	PACKAGE_INSTALL_PATH="${install_path}"
-
 	DOWNLOAD_URL="https://github.com/espressif/esp-idf/archive/refs/tags/$install_version.tar.gz"
-
-	echo "Package TAR: $PACKAGE_TAR_PATH"
-	echo "Extract TAR TO: $PACKAGE_INSTALL_PATH	"
 
 	curl -L -o "$PACKAGE_TAR_PATH" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
 
