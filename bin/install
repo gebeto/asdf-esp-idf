@@ -15,13 +15,17 @@ install_version() {
 
 	echo "Installing ESP-IDF version '${install_version}' at '${install_path}' using install type '${install_type}'"
 
-	PACKAGE_TAR_PATH="${install_path}/esp-idf-${install_version}.tar.gz"
+	PACKAGE_TAR_PATH="${install_path}/sources.tar.gz"
 	PACKAGE_INSTALL_PATH="${install_path}"
-	DOWNLOAD_URL="https://github.com/espressif/esp-idf/archive/refs/tags/$install_version.tar.gz"
+	DOWNLOAD_URL="https://github.com/espressif/esp-idf/archive/refs/tags/v$install_version.tar.gz"
 
 	curl -L -o "$PACKAGE_TAR_PATH" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
 
-	tar -zxf "$PACKAGE_TAR_PATH" -C "$PACKAGE_INSTALL_PATH" || fail "Could not extract $PACKAGE_TAR_PATH"
+	tar -xzf "$PACKAGE_TAR_PATH" -C "$PACKAGE_INSTALL_PATH" --strip-components=1 || fail "Could not extract $PACKAGE_TAR_PATH"
+
+	rm "$PACKAGE_TAR_PATH";
 }
 
 install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
+cd "$ASDF_INSTALL_PATH"
+./install.sh

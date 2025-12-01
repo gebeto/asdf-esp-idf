@@ -2,8 +2,7 @@
 
 set -euo pipefail
 
-GH_REPO="espressif/esp-idf"
-RESPONSE=$(curl -s https://api.github.com/repos/$GH_REPO/releases/latest | jq -r '.tag_name')
+RESPONSE=$(curl -s https://api.github.com/repos/espressif/esp-idf/releases/latest | jq -r '.tag_name' | awk '{print substr($1, 2)}')
 
 printf "%s\n" "$RESPONSE"
 
