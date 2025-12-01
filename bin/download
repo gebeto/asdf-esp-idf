@@ -10,6 +10,17 @@ source "${plugin_dir}/lib/utils.bash"
 
 mkdir -p "$ASDF_DOWNLOAD_PATH"
 
+download_release() {
+	local version=$1
+	local output_file=$2
+
+	DOWNLOAD_URL="https://github.com/espressif/esp-idf/archive/refs/tags/$version.tar.gz"
+
+	echo "Downloading ESP-IDF version '${version}' to '${output_file}' from '${DOWNLOAD_URL}'"
+
+	curl -L -o "$output_file" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
+}
+
 # TODO: Adapt this to proper extension and adapt extracting strategy.
 release_file="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar.gz"
 

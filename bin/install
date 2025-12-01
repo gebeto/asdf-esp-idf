@@ -8,4 +8,15 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 # shellcheck source=./lib/utils.bash
 source "${plugin_dir}/lib/utils.bash"
 
+install_version() {
+	local install_type=$1
+	local install_version=$2
+	local install_path=$3
+
+	echo "Installing ESP-IDF version '${install_version}' at '${install_path}' using install type '${install_type}'"
+
+	# Clone the ESP-IDF repository
+	#  git clone -b $install_version --recursive https://github.com/espressif/esp-idf.git esp-idf-$install_version
+}
+
 install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
