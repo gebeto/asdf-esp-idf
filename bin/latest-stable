@@ -5,8 +5,7 @@ set -euo pipefail
 GH_REPO="espressif/esp-idf"
 RESPONSE=$(curl -s https://api.github.com/repos/$GH_REPO/releases/latest | jq -r '.tag_name')
 
-echo $RESPONSE
-
+printf "%s\n" "$RESPONSE"
 
 # current_script_path=${BASH_SOURCE[0]}
 # plugin_dir=$(dirname "$(dirname "$current_script_path")")
