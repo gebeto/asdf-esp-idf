@@ -10,11 +10,21 @@ source "${plugin_dir}/lib/utils.bash"
 
 list_all_versions() {
 	git ls-remote --tags https://github.com/espressif/esp-idf | awk '{
+		# 1. Get the second field
 		field = $2
+
+		# 2. Remove the "refs/tags/" prefix
+		# substr(string, start_position)
+		# The prefix is 11 characters long ("refs/tags/")
 		version = substr(field, 12)
+
+		# 3. Remove the "^{}" suffix if it exists
+		# gsub(regex, replacement, string)
 		gsub(/\^\{\}/, "", version)
+
+		# 4. Print the result
 		print version
 	}'
 }
 
-list_all_versions | xargs echo
+list_all_versions | sort_versions | xargs echo
