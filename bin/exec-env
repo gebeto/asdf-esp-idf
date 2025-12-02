@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-source "$ASDF_INSTALL_PATH/export.sh
+set -aeuo pipefail
+
+export IDF_PATH="${ASDF_INSTALL_PATH}"
+export IDF_TOOLS_PATH="${IDF_PATH}/espressif"
+source $IDF_PATH/export.sh
