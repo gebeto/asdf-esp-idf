@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+current_script_path=${BASH_SOURCE[0]}
+plugin_dir=$(dirname "$(dirname "$current_script_path")")
+
+# shellcheck source=./lib/utils.bash
+source "${plugin_dir}/lib/utils.bash"
+
+echo "Downloading ESP-IDF version '$ASDF_INSTALL_VERSION' at '$ASDF_DOWNLOAD_PATH' using install type '$ASDF_INSTALL_TYPE'"
+
+DOWNLOAD_URL="https://github.com/espressif/esp-idf/archive/refs/tags/v$ASDF_INSTALL_VERSION.tar.gz"
+
+curl -L -o "$ASDF_DOWNLOAD_PATH/sources.tar.gz" "$DOWNLOAD_URL" || fail "Could not download $DOWNLOAD_URL"
+# tar -xzf "$PACKAGE_TAR_PATH" -C "$PACKAGE_DOWNLOAD_PATH" --strip-components=1 || fail "Could not extract $PACKAGE_TAR_PATH"
+# rm "$PACKAGE_TAR_PATH"

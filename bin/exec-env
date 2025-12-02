@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+source "$ASDF_INSTALL_PATH/export.sh
